@@ -1,0 +1,33 @@
+<!doctype html>
+<title>Flask Image Classifier</title>
+<div align = "center">
+	<h1>LEAF DISEASE DETECTION</h1>
+	<h3>Select a file to upload</h3>
+</div>
+	<p>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+        Label: {{ messages[0] }}
+        Accuracy: {{ messages[1] }}
+	  {% endif %}
+	{% endwith %}
+	</p>
+<div align="center">
+<form method="post" action="/" enctype="multipart/form-data">
+    <dl>
+	<p>
+		<input type="file" name="file" autocomplete="off" required>
+	</p>
+    </dl>
+    <p>
+	<input type="submit" value="Submit">
+    </p>
+</form>
+
+{% if predictions != '' %}
+<p>
+	<img src="{{ url_for('static', filename = filename) }}" alt="">
+	<br><h2>Result: {{ predictions }}</h2>
+</p>
+{% endif %}
+</div>
